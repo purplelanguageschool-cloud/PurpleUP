@@ -1,1 +1,263 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#7c3aed" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="PurpleUp" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/tabler-icons.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <title>PurpleUp</title>
+</head>
+<body>
+<div id="app">
+
+  <!-- SPLASH -->
+  <div id="s-splash" class="screen on">
+    <div class="splash-inner">
+      <div class="splash-logo">
+        <div class="splash-icon"><i class="ti ti-planet"></i></div>
+        <div class="splash-name">Purple<span>Up</span></div>
+      </div>
+      <div class="splash-sub">Sua trilha semanal de idiomas</div>
+      <div class="splash-loader"><div class="splash-bar"></div></div>
+    </div>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="s-login" class="screen">
+    <div class="login-wrap">
+      <div class="login-logo">
+        <div class="login-icon"><i class="ti ti-planet"></i></div>
+        <div class="login-title">Purple<span>Up</span></div>
+      </div>
+      <div class="login-card">
+        <div class="login-greeting">Bem-vindo!</div>
+        <div class="login-hint">Escolha como deseja entrar</div>
+        <button class="btn-google" onclick="loginGoogle()">
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          Entrar com Google <span class="badge-role">Aluno</span>
+        </button>
+        <div class="login-divider"><span>ou</span></div>
+        <div class="teacher-section">
+          <div class="teacher-label"><i class="ti ti-school"></i> Área do Professor</div>
+          <div class="field-group">
+            <label class="field-label">E-mail</label>
+            <input class="field-input" type="email" id="inp-email" placeholder="professor@escola.com" />
+          </div>
+          <div class="field-group">
+            <label class="field-label">Senha</label>
+            <input class="field-input" type="password" id="inp-senha" placeholder="••••••••" />
+          </div>
+          <div class="teacher-btns">
+            <button class="btn-teacher" onclick="loginEmail()">Entrar</button>
+            <button class="btn-teacher-ghost" onclick="registerEmail()">Criar conta</button>
+          </div>
+        </div>
+        <div id="login-error" class="login-error"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOME -->
+  <div id="s-home" class="screen">
+    <div class="top-bar">
+      <div class="top-logo">Purple<span>Up</span></div>
+      <div class="top-right">
+        <div class="streak-pill"><i class="ti ti-flame"></i> <span id="streak-val">0</span></div>
+        <button class="icon-btn" onclick="goScreen('profile')"><i class="ti ti-user-circle"></i></button>
+      </div>
+    </div>
+    <div class="scroll-area">
+      <div class="hero-card">
+        <div class="hero-left">
+          <div class="hero-greet" id="hero-greet">Olá!</div>
+          <div class="hero-sub">Nível <span id="hero-level">1</span> · <span id="hero-xp">0</span> XP</div>
+        </div>
+        <div class="hero-xp-badge" id="hero-today-xp">+0 XP hoje</div>
+      </div>
+      <div class="streak-banner" id="streak-banner" style="display:none">
+        <i class="ti ti-flame"></i>
+        <div><div class="sb-title" id="streak-title">Boa sequência!</div><div class="sb-sub">Continue hoje para manter sua sequência</div></div>
+      </div>
+      <div class="sec-head"><div class="sec-title">Idiomas</div></div>
+      <div class="lang-tabs" id="lang-tabs-home">
+        <div class="ltab on" onclick="switchLang('en','home')"><div class="lang-badge en">EN</div><div class="ltab-name">Inglês</div></div>
+        <div class="ltab" onclick="switchLang('es','home')"><div class="lang-badge es">ES</div><div class="ltab-name">Espanhol</div></div>
+      </div>
+      <div class="sec-head">
+        <div class="sec-title">Semana atual</div>
+        <div class="sec-action" onclick="goScreen('week')">ver tudo</div>
+      </div>
+      <div class="week-strip" id="week-strip"></div>
+      <div class="prog-bar-wrap">
+        <div class="prog-label"><span>Progresso semanal</span><span id="week-prog-label">0/7 dias</span></div>
+        <div class="prog-track"><div class="prog-fill" id="week-prog-fill" style="width:0%"></div></div>
+      </div>
+      <div class="sec-head"><div class="sec-title" id="today-label">Atividades de hoje</div></div>
+      <div id="today-lessons"></div>
+      <div style="height:80px"></div>
+    </div>
+    <div class="tab-bar">
+      <button class="tab on" onclick="goScreen('home')"><i class="ti ti-home"></i><span>Início</span></button>
+      <button class="tab" onclick="goScreen('week')"><i class="ti ti-calendar-week"></i><span>Semana</span></button>
+      <button class="tab" onclick="goScreen('progress')"><i class="ti ti-chart-bar"></i><span>Progresso</span></button>
+      <button class="tab" onclick="goScreen('profile')"><i class="ti ti-user"></i><span>Perfil</span></button>
+    </div>
+  </div>
+
+  <!-- SEMANA -->
+  <div id="s-week" class="screen">
+    <div class="top-bar">
+      <button class="back-btn" onclick="goScreen('home')"><i class="ti ti-arrow-left"></i></button>
+      <div class="top-title" id="week-screen-title">Semana</div>
+    </div>
+    <div class="scroll-area">
+      <div class="lang-tabs" id="lang-tabs-week">
+        <div class="ltab on" onclick="switchLang('en','week')"><div class="lang-badge en">EN</div><div class="ltab-name">Inglês</div></div>
+        <div class="ltab" onclick="switchLang('es','week')"><div class="lang-badge es">ES</div><div class="ltab-name">Espanhol</div></div>
+      </div>
+      <div id="week-days-list"></div>
+      <div style="height:24px"></div>
+    </div>
+  </div>
+
+  <!-- LIÇÃO -->
+  <div id="s-lesson" class="screen">
+    <div class="top-bar">
+      <button class="back-btn" onclick="goScreen('week')"><i class="ti ti-x"></i></button>
+      <div class="top-title" id="lesson-title">Lição</div>
+      <div class="lives-display" id="lives-display">❤️❤️❤️</div>
+    </div>
+    <div class="ex-prog-wrap"><div class="ex-prog-track"><div class="ex-prog-fill" id="ex-prog-fill"></div></div></div>
+    <div class="ex-wrap" id="ex-wrap"></div>
+  </div>
+
+  <!-- RESULTADO -->
+  <div id="s-result" class="screen">
+    <div class="res-wrap">
+      <div class="res-circle" id="res-icon"><i class="ti ti-trophy"></i></div>
+      <div class="res-title" id="res-title">Muito bem!</div>
+      <div class="res-sub" id="res-sub">Lição concluída!</div>
+      <div class="res-kpis">
+        <div class="res-k"><div class="res-kv" id="r-xp">+20 XP</div><div class="res-kl">XP GANHO</div></div>
+        <div class="res-k"><div class="res-kv" id="r-acc" style="color:#7c3aed">—</div><div class="res-kl">PRECISÃO</div></div>
+        <div class="res-k"><div class="res-kv" style="color:#d97706" id="r-streak">🔥0</div><div class="res-kl">SEQUÊNCIA</div></div>
+        <div class="res-k"><div class="res-kv" style="color:#0f6e56" id="r-lessons">0/0</div><div class="res-kl">HOJE</div></div>
+      </div>
+      <button class="btn-primary" onclick="goScreen('week')">Próxima lição</button>
+      <button class="btn-ghost" onclick="goScreen('home')" style="margin-top:10px">Ir para o início</button>
+    </div>
+  </div>
+
+  <!-- PROGRESSO -->
+  <div id="s-progress" class="screen">
+    <div class="top-bar"><div class="top-logo">Progresso</div></div>
+    <div class="scroll-area">
+      <div class="kpi-grid">
+        <div class="kpi-card"><div class="kpi-ico" style="background:#ede9fe"><i class="ti ti-flame" style="color:#3c1a8e"></i></div><div><div class="kpi-v" id="kpi-streak">0</div><div class="kpi-l">dias seguidos</div></div></div>
+        <div class="kpi-card"><div class="kpi-ico" style="background:#d1fae5"><i class="ti ti-star" style="color:#065f46"></i></div><div><div class="kpi-v" id="kpi-xp">0</div><div class="kpi-l">XP total</div></div></div>
+        <div class="kpi-card"><div class="kpi-ico" style="background:#faeeda"><i class="ti ti-book" style="color:#854f0b"></i></div><div><div class="kpi-v" id="kpi-lessons">0</div><div class="kpi-l">lições feitas</div></div></div>
+        <div class="kpi-card"><div class="kpi-ico" style="background:#e1f5ee"><i class="ti ti-percentage" style="color:#0f6e56"></i></div><div><div class="kpi-v" id="kpi-acc">0%</div><div class="kpi-l">precisão média</div></div></div>
+      </div>
+      <div class="sec-head" style="margin-top:8px"><div class="sec-title">Atividade da semana</div></div>
+      <div class="chart-card"><div class="bar-chart" id="bar-chart"></div></div>
+      <div class="sec-head" style="margin-top:4px"><div class="sec-title">Por idioma</div></div>
+      <div class="lang-prog-card">
+        <div class="lp-row"><div class="lang-badge en" style="width:28px;height:28px;font-size:10px;border-radius:6px">EN</div><span class="lp-name">Inglês</span><span class="lp-xp" id="en-xp">0 XP</span></div>
+        <div class="prog-track"><div class="prog-fill" id="en-prog" style="width:0%"></div></div>
+      </div>
+      <div class="lang-prog-card">
+        <div class="lp-row"><div class="lang-badge es" style="width:28px;height:28px;font-size:10px;border-radius:6px">ES</div><span class="lp-name">Espanhol</span><span class="lp-xp" id="es-xp">0 XP</span></div>
+        <div class="prog-track"><div class="prog-fill" id="es-prog" style="width:0%"></div></div>
+      </div>
+      <div style="height:80px"></div>
+    </div>
+    <div class="tab-bar">
+      <button class="tab" onclick="goScreen('home')"><i class="ti ti-home"></i><span>Início</span></button>
+      <button class="tab" onclick="goScreen('week')"><i class="ti ti-calendar-week"></i><span>Semana</span></button>
+      <button class="tab on"><i class="ti ti-chart-bar"></i><span>Progresso</span></button>
+      <button class="tab" onclick="goScreen('profile')"><i class="ti ti-user"></i><span>Perfil</span></button>
+    </div>
+  </div>
+
+  <!-- PERFIL -->
+  <div id="s-profile" class="screen">
+    <div class="top-bar">
+      <div class="top-logo">Meu perfil</div>
+      <button class="icon-btn" onclick="doLogout()"><i class="ti ti-logout"></i></button>
+    </div>
+    <div class="scroll-area">
+      <div class="profile-hero">
+        <div class="prof-av" id="prof-photo-wrap"><i class="ti ti-user"></i></div>
+        <div class="prof-name" id="prof-name">—</div>
+        <div class="prof-email" id="prof-email">—</div>
+        <div class="prof-level" id="prof-level">Nível 1 · Purple Learner</div>
+        <div class="prof-stats">
+          <div class="ps-item"><div class="ps-v" id="ps-xp">0</div><div class="ps-l">XP</div></div>
+          <div class="ps-item"><div class="ps-v" id="ps-streak">0</div><div class="ps-l">Sequência</div></div>
+          <div class="ps-item"><div class="ps-v" id="ps-lessons">0</div><div class="ps-l">Lições</div></div>
+        </div>
+      </div>
+      <div class="sec-head"><div class="sec-title">Minhas turmas</div></div>
+      <div class="menu-item"><div class="mi-ico" style="background:#ede9fe"><i class="ti ti-school" style="color:#3c1a8e"></i></div><div class="mi-t">Inglês — Turma B · 3º ano</div><i class="ti ti-chevron-right mi-arr"></i></div>
+      <div class="menu-item"><div class="mi-ico" style="background:#e1f5ee"><i class="ti ti-school" style="color:#0f6e56"></i></div><div class="mi-t">Espanhol — Turma A · 3º ano</div><i class="ti ti-chevron-right mi-arr"></i></div>
+      <div class="sec-head" style="margin-top:14px"><div class="sec-title">Conta</div></div>
+      <div class="menu-item" onclick="doLogout()"><div class="mi-ico" style="background:#fee2e2"><i class="ti ti-logout" style="color:#991b1b"></i></div><div class="mi-t" style="color:#991b1b">Sair da conta</div><i class="ti ti-chevron-right mi-arr"></i></div>
+      <div style="height:80px"></div>
+    </div>
+    <div class="tab-bar">
+      <button class="tab" onclick="goScreen('home')"><i class="ti ti-home"></i><span>Início</span></button>
+      <button class="tab" onclick="goScreen('week')"><i class="ti ti-calendar-week"></i><span>Semana</span></button>
+      <button class="tab" onclick="goScreen('progress')"><i class="ti ti-chart-bar"></i><span>Progresso</span></button>
+      <button class="tab on"><i class="ti ti-user"></i><span>Perfil</span></button>
+    </div>
+  </div>
+
+  <!-- PAINEL PROFESSOR -->
+  <div id="s-teacher" class="screen">
+    <div class="top-bar">
+      <div class="top-logo" style="color:#0f6e56">Admin<span style="opacity:.6"> · Professor</span></div>
+      <button class="icon-btn" onclick="doLogout()"><i class="ti ti-logout"></i></button>
+    </div>
+    <div class="scroll-area">
+      <div class="teacher-hero">
+        <i class="ti ti-device-desktop-analytics" style="font-size:28px;color:#fff;margin-bottom:6px"></i>
+        <div class="th-title">Painel do professor</div>
+        <div class="th-sub" id="teacher-email-display">—</div>
+      </div>
+      <div class="sec-head" style="margin-top:16px"><div class="sec-title">Cadastrar atividade</div></div>
+      <div class="admin-card">
+        <div class="field-group"><label class="field-label">Idioma</label><select class="field-input" id="adm-lang"><option value="en">Inglês</option><option value="es">Espanhol</option></select></div>
+        <div class="field-group"><label class="field-label">Dia da semana</label><select class="field-input" id="adm-day"><option value="0">Segunda-feira</option><option value="1">Terça-feira</option><option value="2">Quarta-feira</option><option value="3">Quinta-feira</option><option value="4">Sexta-feira</option><option value="5">Sábado</option><option value="6">Domingo</option></select></div>
+        <div class="field-group"><label class="field-label">Título</label><input class="field-input" type="text" id="adm-title" placeholder="Ex: Present Perfect" /></div>
+        <div class="field-group"><label class="field-label">Tipo</label><select class="field-input" id="adm-type"><option value="grammar">Gramática</option><option value="listening">Listening</option><option value="writing">Redação</option><option value="vocabulary">Vocabulário</option><option value="reading">Leitura</option></select></div>
+        <div class="field-group"><label class="field-label">Pergunta</label><input class="field-input" type="text" id="adm-q" placeholder="Ex: Qual frase está correta?" /></div>
+        <div class="field-group"><label class="field-label">Opção A — correta</label><input class="field-input" type="text" id="adm-a" placeholder="Resposta certa" /></div>
+        <div class="field-group"><label class="field-label">Opção B</label><input class="field-input" type="text" id="adm-b" placeholder="Alternativa errada" /></div>
+        <div class="field-group"><label class="field-label">Opção C</label><input class="field-input" type="text" id="adm-c" placeholder="Alternativa errada" /></div>
+        <div class="field-group"><label class="field-label">Opção D</label><input class="field-input" type="text" id="adm-d" placeholder="Alternativa errada" /></div>
+        <button class="btn-primary" onclick="saveLesson()" style="background:#059669"><i class="ti ti-plus" style="font-size:15px;vertical-align:-2px"></i> Salvar atividade</button>
+      </div>
+      <div class="sec-head"><div class="sec-title">Atividades cadastradas</div><div class="sec-action" style="color:#dc2626" onclick="clearLessons()">limpar tudo</div></div>
+      <div id="adm-list"></div>
+      <div style="height:24px"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Carregar data e app PRIMEIRO, firebase POR ÚLTIMO -->
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script type="module" src="js/firebase.js"></script>
+<script>if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');</script>
+</body>
+</html>
