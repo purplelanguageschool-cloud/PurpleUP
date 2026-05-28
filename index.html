@@ -15,6 +15,12 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/tabler-icons.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <title>PurpleUp</title>
+  <style>
+    .splash-icon { background: none !important; }
+    .splash-icon img, .login-icon img { width:100%; height:100%; object-fit:contain; }
+    .login-icon { background: none !important; }
+    .login-icon img { filter: brightness(0) invert(1); }
+  </style>
 </head>
 <body>
 <div id="app">
@@ -23,7 +29,7 @@
   <div id="s-splash" class="screen on">
     <div class="splash-inner">
       <div class="splash-logo">
-        <div class="splash-icon"><i class="ti ti-planet"></i></div>
+        <div class="splash-icon"><img src="data:image/png;base64,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" alt="PurpleUp logo" /></div>
         <div class="splash-name">Purple<span>Up</span></div>
       </div>
       <div class="splash-sub">Sua trilha semanal de idiomas</div>
@@ -35,17 +41,20 @@
   <div id="s-login" class="screen">
     <div class="login-wrap">
       <div class="login-logo">
-        <div class="login-icon"><i class="ti ti-planet"></i></div>
+        <div class="login-icon"><img src="data:image/png;base64,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" alt="logo" /></div>
         <div class="login-title">Purple<span>Up</span></div>
       </div>
       <div class="login-card">
         <div class="login-greeting">Bem-vindo!</div>
         <div class="login-hint">Escolha como deseja entrar</div>
+
         <button class="btn-google" onclick="loginGoogle()">
           <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
           Entrar com Google <span class="badge-role">Aluno</span>
         </button>
+
         <div class="login-divider"><span>ou</span></div>
+
         <div class="teacher-section">
           <div class="teacher-label"><i class="ti ti-school"></i> Área do Professor</div>
           <div class="field-group">
@@ -85,7 +94,7 @@
       </div>
       <div class="streak-banner" id="streak-banner" style="display:none">
         <i class="ti ti-flame"></i>
-        <div><div class="sb-title" id="streak-title">Boa sequência!</div><div class="sb-sub">Continue hoje para manter sua sequência</div></div>
+        <div><div class="sb-title" id="streak-title">Boa sequência!</div><div class="sb-sub">Continue hoje!</div></div>
       </div>
       <div class="sec-head"><div class="sec-title">Idiomas</div></div>
       <div class="lang-tabs" id="lang-tabs-home">
@@ -206,10 +215,7 @@
           <div class="ps-item"><div class="ps-v" id="ps-lessons">0</div><div class="ps-l">Lições</div></div>
         </div>
       </div>
-      <div class="sec-head"><div class="sec-title">Minhas turmas</div></div>
-      <div class="menu-item"><div class="mi-ico" style="background:#ede9fe"><i class="ti ti-school" style="color:#3c1a8e"></i></div><div class="mi-t">Inglês — Turma B · 3º ano</div><i class="ti ti-chevron-right mi-arr"></i></div>
-      <div class="menu-item"><div class="mi-ico" style="background:#e1f5ee"><i class="ti ti-school" style="color:#0f6e56"></i></div><div class="mi-t">Espanhol — Turma A · 3º ano</div><i class="ti ti-chevron-right mi-arr"></i></div>
-      <div class="sec-head" style="margin-top:14px"><div class="sec-title">Conta</div></div>
+      <div class="sec-head"><div class="sec-title">Conta</div></div>
       <div class="menu-item" onclick="doLogout()"><div class="mi-ico" style="background:#fee2e2"><i class="ti ti-logout" style="color:#991b1b"></i></div><div class="mi-t" style="color:#991b1b">Sair da conta</div><i class="ti ti-chevron-right mi-arr"></i></div>
       <div style="height:80px"></div>
     </div>
@@ -254,7 +260,6 @@
 
 </div>
 
-<!-- Carregar data e app PRIMEIRO, firebase POR ÚLTIMO -->
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
 <script type="module" src="js/firebase.js"></script>
