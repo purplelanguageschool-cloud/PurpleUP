@@ -468,3 +468,50 @@ select.field-input { cursor: pointer; }
 .ali-title { font-size: 13px; font-weight: 600; color: var(--t1); }
 .ali-meta { font-size: 11px; color: var(--t3); margin-top: 2px; }
 .ali-del { background: none; border: none; cursor: pointer; color: var(--err); font-size: 18px; flex-shrink: 0; }
+
+/* ===== GOOGLE BUTTON ===== */
+.btn-google {
+  width: 100%; padding: 13px 16px;
+  background: #fff; color: #3c3c3c;
+  border: 1px solid #dadce0; border-radius: var(--rl);
+  font-size: 15px; font-weight: 500; font-family: inherit;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  gap: 10px; transition: background 0.15s;
+}
+.btn-google:hover { background: #f8f9fa; }
+.badge-role {
+  font-size: 10px; font-weight: 600; padding: 2px 7px;
+  border-radius: 99px; background: #ede9fe; color: #3c1a8e; margin-left: 4px;
+}
+.login-divider {
+  text-align: center; margin: 16px 0; position: relative;
+  color: var(--t3); font-size: 12px;
+}
+.login-divider::before, .login-divider::after {
+  content: ''; position: absolute; top: 50%; width: 42%; height: 0.5px;
+  background: var(--bd2);
+}
+.login-divider::before { left: 0; }
+.login-divider::after { right: 0; }
+.teacher-section { background: var(--bg2); border-radius: var(--r); padding: 14px; }
+.teacher-label {
+  font-size: 12px; font-weight: 600; color: var(--teal); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 5px;
+}
+.teacher-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+.btn-teacher {
+  padding: 11px; background: var(--teal); color: #fff;
+  border: none; border-radius: var(--r);
+  font-size: 14px; font-weight: 500; font-family: inherit; cursor: pointer;
+}
+.btn-teacher-ghost {
+  padding: 11px; background: none; color: var(--teal);
+  border: 1px solid var(--teal); border-radius: var(--r);
+  font-size: 14px; font-weight: 500; font-family: inherit; cursor: pointer;
+}
+.login-error {
+  display: none; background: var(--errl); color: #991b1b;
+  border-radius: var(--r); padding: 10px 12px;
+  font-size: 13px; margin-top: 12px; text-align: center;
+}
+.prof-email { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 2px; }
